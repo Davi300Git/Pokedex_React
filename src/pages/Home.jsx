@@ -17,15 +17,27 @@ export default function Home() {
         }
         var response = axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then((res) => setPokemons(res)).catch((err) => (err)) ;
     };
+    const pokemonFilter = (name) => {
+        var filteredPokemons = []
+        if( name===""){
+            getPokemons();
+        }
+        for (var i in pokemons ) {
+            if(pokemons[i].data.name.includes(name)) {
+                filteredPokemons.push(pokemons[i]);
+            }
+        }
+        setPokemons(filteredPokemons);
+    } 
 
   return (
     <div>
-    <NavBar />
+    <NavBar pokemonFilter={pokemonFilter } />
     <Container maxWidth="false">
-        <Grid container spacing={8}>
+        <Grid container spacing={3}>
             {pokemons.map((pokemon, key) => (
-                <Grid item xs={3} key={key}>
-                <PokemonCard name={pokemon.data.name} image={pokemon.data.sprites.front_default} />
+                <Grid item xs={2} key={key}>
+                <PokemonCard name={pokemon.data.name} image={pokemon.data.sprites.front_default} types={pokemon.data.types} />
             </Grid>
             ))}
         </Grid>
