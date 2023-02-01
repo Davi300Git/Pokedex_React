@@ -63,6 +63,7 @@ export default function NavBar({ pokemonFilter }) {
                 placeholder="Search…"
                 inputProps={{ 'aria-label': 'search' }}
                 sx={{ color:"#FFCC00", backgroundColor:"FFCC00" }}
+                
               />
             </Search>
           </Box>
